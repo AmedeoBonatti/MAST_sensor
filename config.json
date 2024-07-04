@@ -1,0 +1,24 @@
+{
+    "name": {
+      "en": "Read Sensors @MAST"
+    },
+    "description": {
+      "en": "Read the sensors connected to the Bittle"
+    },
+    "author": "Amedeo Bonatti",
+    "email": "amedeo.bonatti@ing.unipi.it",
+    "license": "MIT",
+    "isBoard": false,
+    "id": "sensors",
+    "platform": ["win","mac","web","linux"],
+    "version": "0.1.1",
+    "asset": {
+      "python": {
+          "dir": "python/",
+          "main": "main.ts",
+          "dependencies": {
+                    "pandas":"2.2"
+          }
+        }
+     }
+  }
