@@ -1,5 +1,5 @@
 import time
-import pandas as pd
+import csv
 from PetoiRobot import *
 from datetime import datetime
 import platform
@@ -11,7 +11,7 @@ def read_sensors(sensors:list, read_time:int):
     * sensors[list]: list of connected sensors
     * read_time[int]: time (in seconds) for the acquisition
 
-    Returns data as a Pandas Dataframe.
+    Returns data as a list of dictionaries.
     """
 
     if len(sensors) == 0: raise ValueError('Please specify at least one sensor.')
@@ -39,7 +39,6 @@ def read_sensors(sensors:list, read_time:int):
         tmp = {}
         tmp['timestamp'] = datetime.now()
 
-
         #Loop through the sensors:
         for sensor in sensors:
             if sensor == 'pir':
@@ -65,16 +64,15 @@ def read_sensors(sensors:list, read_time:int):
     print('Finished data acquisition')
     print('----------------------------')
 
-    #Convert the data to a pandas dataframe:
-    data = pd.DataFrame(data)
-
     return data
 
-def save_sensor_data(data:pd.DataFrame, filename:str):
+def save_sensor_data(data:list, filename:str):
 
     """
     Function to save the data locally in csv format.
     """
+
+    if len(data) == 0: raise ValueError('Please provide some data')
 
     #Constants definition:
     file_ext = '.csv'
@@ -90,24 +88,24 @@ def save_sensor_data(data:pd.DataFrame, filename:str):
         home = os.getenv('HOME') 
         config_dir = home 
     
-    # config_dir = config_dir + sep +'.config' + sep +'Petoi'
-
     #Create the data directory:
     data_dir = config_dir + sep + 'sensor_data'
 
     #Check if it exists:    
     if not os.path.exists(data_dir):
+
         #Create the directory if it does not exist
         os.makedirs(data_dir)
 
     #Check if the file name already exists and if yes make it unique:
     file_dir = data_dir + sep + filename + file_ext
 
-    print('Saving data...')
-    if not os.path.exists(file_dir):
-        #Save the csv:
-        data.to_csv(file_dir)
-    else:
+    #Get the column names:
+    keys = data[0].keys()
+
+    #Check if the file already exists:
+    if os.path.exists(file_dir):
+
         #Change the file name:
         cnt = 1
         file_dir = data_dir + sep + '{}-{}{}'.format(filename, cnt, file_ext)
@@ -115,7 +113,12 @@ def save_sensor_data(data:pd.DataFrame, filename:str):
             cnt += 1
             file_dir = data_dir + sep + '{}-{}{}'.format(filename, cnt, file_ext)
 
-        #Save the csv:
-        data.to_csv(file_dir)
+    print('Saving data...')
+    with open(file_dir, 'w', newline='') as output_file:
+        dict_writer = csv.DictWriter(output_file, keys)
+        dict_writer.writeheader()
+        dict_writer.writerows(data)
     
     print('File saved successfully at {}!'.format(file_dir))
+
+    return None
