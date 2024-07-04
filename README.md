@@ -27,4 +27,4 @@ The user can specify the file name. If a file exists in the directory with that 
 
 Download and install [Mind+ Desktop app](https://mindplus.dfrobot.com).
 
-Input the project URL: **https://github.com/PetoiCamp/Petoi_MindPlusLib** in the interface to import this library.
+Input the project URL: **https://github.com/AmedeoBonatti/MAST_sensor** in the interface to import this library.
