@@ -10,9 +10,9 @@ Library to add the following blocks:
 - read_sensor_data: take as input a list of sensor names and a reading time, and outputs a pandas dataframe containing the data
 - save_sensor_data: take as input the pandas dataframe containing the data, and saves it locally
 
-<img src="./python/_images/read_sensor.png" width="500">
+<img src="./python/_images/read_sensor.png" height="40">
 
-<img src="./python/_images/save_sensor.png" width="500">
+<img src="./python/_images/save_sensor.png" height="40">
 
 Compatible sensors include:
 - 'pir': passive infrared sensor (digital reading, single channel)
