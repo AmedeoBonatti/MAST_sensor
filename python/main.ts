@@ -1,4 +1,3 @@
-
 //% color="#da43ad" iconWidth=50 iconHeight=40
 namespace robot{
 /*    
@@ -34,7 +33,5 @@ namespace robot{
         Generator.addCode(`# Linux: /home/{your user name}/sensor_data`)
         Generator.addCode(`# Please enter the filename in the block`)
         Generator.addCode(`save_sensor_data(${data}, ${save_name})`)
-
     }
-	
 }

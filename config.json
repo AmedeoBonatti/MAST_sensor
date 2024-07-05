@@ -16,7 +16,9 @@
       "python": {
           "dir": "python/",
           "main": "main.ts",
-          "dependencies": {}
+          "dependencies": {
+            "pandas": "2.0.3"
+          }
         }
      }
   }

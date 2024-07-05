@@ -3,6 +3,7 @@ import csv
 from PetoiRobot import *
 from datetime import datetime
 import platform
+import pandas as pd
 
 def read_sensors(sensors:list, read_time:int):
 
@@ -61,12 +62,15 @@ def read_sensors(sensors:list, read_time:int):
         #Wait a little in between acquisitions:
         time.sleep(wait_for)
 
+    #Convert to pandas dataframe:
+    data = pd.DataFrame(data)
+
     print('Finished data acquisition')
     print('----------------------------')
 
     return data
 
-def save_sensor_data(data:list, filename:str):
+def save_sensor_data(data:pd.DataFrame, filename:str):
 
     """
     Function to save the data locally in csv format.
@@ -114,11 +118,7 @@ def save_sensor_data(data:list, filename:str):
             file_dir = data_dir + sep + '{}-{}{}'.format(filename, cnt, file_ext)
 
     print('Saving data...')
-    with open(file_dir, 'w', newline='') as output_file:
-        dict_writer = csv.DictWriter(output_file, keys)
-        dict_writer.writeheader()
-        dict_writer.writerows(data)
-    
-    print('File saved successfully at {}!'.format(file_dir))
+    data.to_csv(file_dir)    
+    print('File saved successfully at {}'.format(file_dir))
 
     return None
