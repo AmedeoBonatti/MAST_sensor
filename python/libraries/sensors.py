@@ -108,9 +108,6 @@ def save_sensor_data(data:pd.DataFrame, filename:str):
     #Check if the file name already exists and if yes make it unique:
     file_dir = data_dir + sep + filename + file_ext
 
-    #Get the column names:
-    keys = data[0].keys()
-
     #Check if the file already exists:
     if os.path.exists(file_dir):
 
