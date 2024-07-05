@@ -5,14 +5,15 @@ from datetime import datetime
 import platform
 import pandas as pd
 
-def read_sensors(sensors:list, read_time:int):
+def read_sensors(sensors:list, read_time:int, label:str):
 
     """
     Function to read the specified sensors and return it in a dataframe format.
     * sensors[list]: list of connected sensors
     * read_time[int]: time (in seconds) for the acquisition
+    * label[str]: label for AI
 
-    Returns data as a list of dictionaries.
+    Returns data as a pandas dataframe.
     """
 
     if len(sensors) == 0: raise ValueError('Please specify at least one sensor.')
@@ -53,6 +54,9 @@ def read_sensors(sensors:list, read_time:int):
             elif sensor == 'ir':
                 tmp['ir_right'] = readAnalogValue(16)
                 tmp['ir_left'] = readAnalogValue(17)
+
+        #Add the label:
+        tmp['label'] = label
 
         print('Acquired a data point from the following sensors: {}'.format(sensors))
 
@@ -118,7 +122,7 @@ def save_sensor_data(data:pd.DataFrame, filename:str):
             file_dir = data_dir + sep + '{}-{}{}'.format(filename, cnt, file_ext)
 
     print('Saving data...')
-    data.to_csv(file_dir)    
+    data.to_csv(file_dir)
     print('File saved successfully at {}'.format(file_dir))
 
     return None
