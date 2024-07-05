@@ -4,28 +4,19 @@ from PetoiRobot import *
 from datetime import datetime
 import platform
 
-def read_sensors(sensors:list, read_time:int, label:str):
+def read_sensors(read_time:int, label:str):
 
     """
-    Function to read the specified sensors and return it in a dataframe format.
-    * sensors[list]: list of connected sensors
+    Function to read all sensors and return it in a dataframe format (-1 if no data is available for the sensor).
     * read_time[int]: time (in seconds) for the acquisition
     * label[str]: label for AI
 
     Returns data as a pandas dataframe.
     """
-
-    if len(sensors) == 0: raise ValueError('Please specify at least one sensor.')
-    
-    for sensor in sensors:
-        if sensor not in ['pir', 'touch', 'light', 'ir']:
-            raise ValueError('Specified an unknown sensor type. Available sensors include: pir, touch, light, ir.')
-
-    if 'touch' in sensors and 'pir' in sensors:
-        raise ValueError('Please specify only one type of digital sensor.')
     
     #Constants definition:
     wait_for = 1
+    sensors = ['pir', 'touch', 'light', 'ir']
 
     if read_time < wait_for: raise ValueError('Please specify a read_time >= 1')
 
