@@ -14,7 +14,7 @@ namespace robot{
     //% SENSORS.shadow="list" SENSORS.defl="'pir', 'light'"
     //% TIME.shadow="number" TIME.defl=10
     //% LABEL.shadow="string" LABEL.defl="label"
-    export function read_sensors(parameter: any, block: any) {
+    export function read_sensors_with_label(parameter: any, block: any) {
         let sensors = parameter.SENSORS.code
         let read_time = parameter.TIME.code
         let label = parameter.LABEL.code
@@ -22,10 +22,10 @@ namespace robot{
 		Generator.addCode(`read_sensors(${sensors}, ${read_time}, ${label})`);
     }
 
-    //% block="Read sensor data from [SENSORS] for [TIME] seconds blockType="reporter"
+    //% block="Read sensor data from [SENSORS] for [TIME] seconds" blockType="reporter"
     //% SENSORS.shadow="list" SENSORS.defl="'pir', 'light'"
     //% TIME.shadow="number" TIME.defl=10
-    export function read_sensors(parameter: any, block: any) {
+    export function read_sensors_no_label(parameter: any, block: any) {
         let sensors = parameter.SENSORS.code
         let read_time = parameter.TIME.code
         Generator.addImport(`from sensors import *`);
