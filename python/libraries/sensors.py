@@ -143,3 +143,24 @@ def save_sensor_data(data: list, filename: str):
     print('File saved successfully at {}'.format(file_dir))
 
     return None
+
+
+def main():
+    # Define the sensors to read:
+    sensors = ['pir', 'light']
+
+    # Define the read time:
+    read_time = 10
+
+    # Define the label:
+    label = 'test'
+
+    # Read the sensors:
+    data = read_sensors(sensors, read_time, label)
+
+    # Save the data:
+    save_sensor_data(data, 'test')
+
+
+if __name__ == '__main__':
+    main()
