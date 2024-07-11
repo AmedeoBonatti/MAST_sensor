@@ -68,7 +68,7 @@ def read_sensors(sensors: list, read_time: int, label: str = ''):
             tmp['ir_left'] = readAnalogValue(17)
         else:
             tmp['ir_right'] = -1
-            tmp['ir_left'] = -1¯
+            tmp['ir_left'] = -1
 
         # Add the label:
         tmp['label'] = label
